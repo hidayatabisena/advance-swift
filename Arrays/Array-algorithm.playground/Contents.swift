@@ -58,3 +58,44 @@ solution(A: [1, 2, 3, 4, 5], K: 2)
 solution(A: [1, 2, 3, 4, 5], K: 3)
 
 solution(A: [3, 8, 9, 7, 6], K: 3)
+
+
+// Dash phone number
+// Reformat to "-" and "-xxx" or "-xx" to block of two number
+func solution(_ S: String) -> String {
+    let noSpace = S.replacingOccurrences(of: " ", with: "")
+    let noSpaceDash = noSpace.replacingOccurrences(of: "-", with: "")
+    
+    var result = ""
+    var count = -2
+    for c in noSpaceDash {
+        result.append(c)
+        if count % 3 == 0 {
+            result.append("-")
+        }
+        count += 1
+    }
+    
+    // trim last dash
+    if result.last == "-" {
+        result = String(result.dropLast())
+    }
+    
+    // if second last char has a dash (-x)
+    // reformat last three chars to (-xx)
+    var chars = Array(result)
+    let secondLastPointer = chars.count - 2
+    if chars[secondLastPointer] == "-" {
+        chars[secondLastPointer] = chars[secondLastPointer - 1]
+        chars[secondLastPointer - 1] = "-"
+    }
+        
+    
+    return String(chars)
+}
+
+solution("123456789")
+solution("0812821285567") // edge cases
+solution("081282128556")
+solution("+62 - 224756-8") // edge cases
+
