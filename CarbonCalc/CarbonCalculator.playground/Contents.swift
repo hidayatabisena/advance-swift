@@ -29,7 +29,8 @@ enum VehicleType {
 
 // Fungsi untuk menghitung emisi karbon
 func calculateCarbonEmission(for journey: Journey) -> Double {
-    return journey.distance * journey.vehicleType.emissionValue
+    let emission = journey.distance * journey.vehicleType.emissionValue
+    return emission
 }
 
 // Contoh penggunaan
